@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Claw" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Claw" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Winit-self" />
+					<Add option="-Wredundant-decls" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Claw" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`sdl-config --libs`" />
+			<Add option="-lSDL_image" />
+		</Linker>
+		<Unit filename="CAnimation.cpp" />
+		<Unit filename="CAnimation.h" />
+		<Unit filename="CApp.cpp" />
+		<Unit filename="CApp.h" />
+		<Unit filename="CApp_OnCleanup.cpp" />
+		<Unit filename="CApp_OnEvent.cpp" />
+		<Unit filename="CApp_OnInit.cpp" />
+		<Unit filename="CApp_OnLoop.cpp" />
+		<Unit filename="CApp_OnRender.cpp" />
+		<Unit filename="CEntity.cpp" />
+		<Unit filename="CEntity.h" />
+		<Unit filename="CEvent.cpp" />
+		<Unit filename="CEvent.h" />
+		<Unit filename="CPlayer.cpp" />
+		<Unit filename="CPlayer.h" />
+		<Unit filename="CSurface.cpp" />
+		<Unit filename="CSurface.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

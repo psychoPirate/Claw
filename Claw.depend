@@ -1,0 +1,77 @@
+# depslib dependency file v1.0
+1361320268 source:/home/goldmonkey/projectos/Claw/CAnimation.cpp
+	"CAnimation.h"
+
+1361318707 /home/goldmonkey/projectos/Claw/CAnimation.h
+	<SDL/SDL.h>
+
+1361500850 source:/home/goldmonkey/projectos/Claw/CApp.cpp
+	"CApp.h"
+
+1361719594 /home/goldmonkey/projectos/Claw/CApp.h
+	<SDL/SDL.h>
+	"CAnimation.h"
+	"CEntity.h"
+	"CEvent.h"
+	"CSurface.h"
+	"CPlayer.h"
+	"CMap.h"
+
+1361411132 /home/goldmonkey/projectos/Claw/CEntity.h
+	<vector>
+	"CAnimation.h"
+	"CSurface.h"
+
+1361052843 /home/goldmonkey/projectos/Claw/CSurface.h
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+
+1361052743 /home/goldmonkey/projectos/Claw/CEvent.h
+	<SDL/SDL.h>
+
+1205558812 source:/home/goldmonkey/projectos/Claw/CApp_OnCleanup.cpp
+	"CApp.h"
+
+1361412004 source:/home/goldmonkey/projectos/Claw/CApp_OnEvent.cpp
+	"CApp.h"
+
+1361719493 source:/home/goldmonkey/projectos/Claw/CApp_OnInit.cpp
+	"CApp.h"
+
+1361201951 source:/home/goldmonkey/projectos/Claw/CApp_OnLoop.cpp
+	"CApp.h"
+
+1361720589 source:/home/goldmonkey/projectos/Claw/CApp_OnRender.cpp
+	"CApp.h"
+
+1361720102 source:/home/goldmonkey/projectos/Claw/CEntity.cpp
+	"CEntity.h"
+	<string.h>
+
+1361323262 source:/home/goldmonkey/projectos/Claw/CEvent.cpp
+	"CEvent.h"
+
+1361052873 source:/home/goldmonkey/projectos/Claw/CSurface.cpp
+	"CSurface.h"
+
+1361323197 /home/goldmonkey/projectos/Claw/CPlayer.h
+	"CEntity.h"
+	"CEvent.h"
+
+1361323632 source:/home/goldmonkey/projectos/Claw/CPlayer.cpp
+	"CPlayer.h"
+
+1361720710 source:/home/goldmonkey/projectos/Claw/CMap.cpp
+	"CMap.h"
+
+1361719186 /home/goldmonkey/projectos/Claw/CMap.h
+	<SDL/SDL.h>
+	<vector>
+	"CTile.h"
+	"CSurface.h"
+
+1361718864 /home/goldmonkey/projectos/Claw/CTile.h
+
+1361718879 source:/home/goldmonkey/projectos/Claw/CTile.cpp
+	"CTile.h"
+
