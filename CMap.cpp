@@ -8,6 +8,8 @@ CMap::CMap()
 
 }
 
+//TODO Fix problem of only load 1 digit tiles
+
 bool CMap::OnLoad(char* File)
 {
     TileList.clear();
@@ -17,27 +19,88 @@ bool CMap::OnLoad(char* File)
         return false;
     }
 
+    char line[1000000];
+    char param1[30];
+    char param2[30];
+    char function[30];
+    int nparam1, nparam2;
+
     FILE* FileHandle = fopen(File, "r");
 
     if(FileHandle == NULL)
     {
+        printf("Can't open %s\n", File);
         return false;
     }
 
-    for(int Y = 0; Y < Height; Y++)
+    while (fgets(line, sizeof line, FileHandle))
     {
-        for(int X = 0; X < Width; X++)
+
+        // Ignore comments
+        if (*line == '#') continue;
+
+        if(*line != 'EOF')
         {
-            CTile tempTile;
 
-            fscanf(FileHandle, "%d:%d ", &tempTile.TileID, &tempTile.TypeID);
+            sscanf(line,"%s %s %d x %d",function, param1, &nparam1, &nparam2);
+            sscanf(line, "%s %s", function, param1);
 
-            TileList.push_back(tempTile);
+            if (strcmp(function, "map") == 0)
+            {
+                if(strcmp(param1, "size") == 0)
+                {
+                    Width  = nparam1;
+                    Height = nparam2;
+                    printf("\nWidth: %d Height: %d\n", Width, Height);
+
+                    //Set function to none because can cause repetions case the next
+                    //lines don't have functions to change the function variable
+                }
+
+                if(strcmp(param1, "setGrid") == 0)
+                {
+
+                    //Jump to grid
+                    fgets(line, sizeof line, FileHandle);
+
+                    int Y = 0;
+                    //Loop through the grid
+                    do
+                    {
+
+                        //Printf current line
+                        for (int X = 0; line[X] !='\n'; X++)
+                        {
+                            //Create temporary Tile
+                            CTile tempTile;
+
+                            if(line[X+1] == ':')
+                                tempTile.TileID = atoi(&line[X]);
+                            else if(line[X-1] == ':')
+                                tempTile.TypeID = atoi(&line[X]); //Assign tileType
+
+                            TileList.push_back(tempTile);
+
+                        }
+
+
+                        fgets(line, sizeof line, FileHandle);
+                        sscanf(line, "%*s %s",param1);
+                        Y++;
+                    }
+                    while(strcmp(param1, "endSetGrid") != 0);
+
+
+                }
+                function[0] = '\0';
+            }
+
         }
-        fscanf(FileHandle, "\n");
+
     }
 
     fclose(FileHandle);
+
 
     return true;
 }
