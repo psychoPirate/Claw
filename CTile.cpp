@@ -1,8 +1,8 @@
 #include "CTile.h"
 
 CTile::CTile(){
-    TileID = 0;
-    TypeID = 0;
+    TileID = -1;
+    TypeID = -1;
 }
 
 

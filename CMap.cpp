@@ -3,8 +3,7 @@
 CMap::CMap()
 {
     Surf_Tileset = NULL;
-    Width = 5;
-    Height = 5;
+
 
 }
 
@@ -64,25 +63,51 @@ bool CMap::OnLoad(char* File)
                     fgets(line, sizeof line, FileHandle);
 
                     int Y = 0;
+                    int XWidth = 0;
+                    int tempTileID = -1, tempTypeID = -1;
+
                     //Loop through the grid
                     do
                     {
-
+                        XWidth = 0;
                         //Printf current line
                         for (int X = 0; line[X] !='\n'; X++)
                         {
                             //Create temporary Tile
-                            CTile tempTile;
+                            if(line[X] == ' ' || line[X] == ':' )
+                                continue;
 
                             if(line[X+1] == ':')
-                                tempTile.TileID = atoi(&line[X]);
-                            else if(line[X-1] == ':')
-                                tempTile.TypeID = atoi(&line[X]); //Assign tileType
+                            {
+                                tempTileID=0;
+                                if(X > 0 && line[X-1] != ' ')
+                                {
+                                    tempTileID = atoi(&line[X-1]);
+                                }
+                                else
+                                    tempTileID = atoi(&line[X]);
+                            }
 
-                            TileList.push_back(tempTile);
+                            if(line[X-1] == ':')
+                            {
+                                tempTypeID = atoi(&line[X]); //Assign tileType
+                            }
 
+
+
+
+                            if(tempTileID != -1 && tempTypeID != -1)
+                            {
+                                CTile tempTile;
+                                tempTile.TileID = tempTileID;
+                                tempTile.TypeID = tempTypeID;
+                                TileList.push_back(tempTile);
+                                tempTileID = -1;
+                                tempTypeID = -1;
+                                printf("Tile ID: %d Type ID %d\n", tempTile.TileID, tempTile.TypeID);
+                                XWidth++;
+                            }
                         }
-
 
                         fgets(line, sizeof line, FileHandle);
                         sscanf(line, "%*s %s",param1);
@@ -90,7 +115,9 @@ bool CMap::OnLoad(char* File)
                     }
                     while(strcmp(param1, "endSetGrid") != 0);
 
-
+                    if(Width != XWidth || Height != Y)
+                        Width = XWidth;
+                    Height = Y;
                 }
                 function[0] = '\0';
             }
@@ -100,7 +127,7 @@ bool CMap::OnLoad(char* File)
     }
 
     fclose(FileHandle);
-
+    printf("Numero de tiles %d", TileList.size());
 
     return true;
 }
@@ -109,9 +136,6 @@ void CMap::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY)
 {
     int TILE_SIZE = 64;
     if(Surf_Tileset == NULL) return;
-
-    int TilesetWidth  = Surf_Tileset->w / TILE_SIZE;
-    int TilesetHeight = Surf_Tileset->h / TILE_SIZE;
 
     int ID = 0;
 
